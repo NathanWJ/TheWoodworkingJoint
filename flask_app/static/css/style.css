@@ -1,0 +1,175 @@
+/***************************************
+* STYLING FOR ENTIRE PAGE
+****************************************/
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    /* border: dotted 1px fuchsia; */
+}
+
+.container, .nav-container, .body-container, .form-container {
+    width: 1000px;
+}
+
+.nav-container, .body-container, .form-container {
+    margin: 0 auto;
+    display: flex;
+}
+
+
+/***************************************
+* STYLING FOR DASHBOARD BOXES
+****************************************/
+.dash-box-container{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.dash-box-box{
+    height: 200px;
+    width: 200px;
+    margin: 5px;
+    padding: 12px;
+    background-color: lightgray;
+    border: 2px solid #6E260E;
+    border-radius: 15px 50px;
+    align-content: center;
+}
+
+.dash-box-title {
+    margin: 0px;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.dash-box-body {
+    margin: 1px 0px 0px 0px;
+    font-size: 14px;
+}
+
+
+/***************************************
+* STYLING FOR HEADER AREA
+****************************************/
+
+.header{
+    height: 75px;
+    margin-bottom: 10px;
+    color: #fff;
+    background-color: #6E260E;
+    border-top: 5px solid dodgerblue;
+    border-bottom: 5px solid dodgerblue;
+    align-content: center;
+}
+
+.nav-container {
+    justify-content: space-between;
+    align-items: center;
+    height: inherit;
+}
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: inherit;
+}
+
+.side-left-nav {
+    margin: 10px;
+}
+
+.side-right-nav {
+    margin: 10px;
+}
+
+.navbtn {
+    margin: 15px;
+}
+
+
+/***************************************
+* STYLING FOR BODY AND FORMS
+****************************************/
+
+.body-container {
+    justify-content: space-evenly;
+    height: inherit;
+}
+
+.side-left-body, .side-right-body {
+    width: 45%;
+    margin: 10px;
+    border: solid 1px gray;
+}
+
+.card-wrapper  {
+    padding: 20px;
+    border: 2px solid lightgray;
+    border-radius: 25px;
+}
+
+.subhead {
+    text-align: center;
+}
+
+.module-header{
+    padding: 5px;
+    background: dimgray;
+    color: white;
+    text-align: center;
+}
+
+.form-row{
+    margin-bottom: 15px;
+}
+
+.form-column {
+    float: left;
+    margin: 0px 20px;
+}
+
+.form-group {
+    margin: 10px;
+}
+
+.col-form-label {
+    font-weight: bold;
+}
+
+.btn-form {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.btn-footer {
+    margin: 20px;
+}
+
+input[type="radio"]{
+    margin: 0 10px 0 10px;
+}
+
+
+/***************************************
+* STYLING FOR FOOTER
+****************************************/
+
+
+.footer-container {
+    margin-top: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/***************************************
+* STYLING FOR ERROR MESSAGES
+****************************************/
+
+.error_message {
+    color: red;
+}

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/style.css') }}">
+    <title>The Woodworking Joint</title>
+</head>
+<body>
+    <div class="header">
+        <div class="nav-container">
+            <div class="side-left-nav">
+                <h1>Welcome, {{user.username}}!</h1>
+            </div>
+            <div class="side-right-nav">
+                <p>
+                    <a href="/new" class="btn btn-light navbtn">Add a Project</a> |
+                    <a href="/logout" class="btn btn-light navbtn">Logout</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h3>Browse the Woodworking Joint</h3>
+        <div class="col-auto">
+            <div class="dash-box-container">
+            {%for woodproject in woodprojects%}
+                <div class="dash-box-box">
+                    <p class="dash-box-title">{{ woodproject.project_name }}</p>
+                    <p class="dash-box-body">Type: {{ woodproject.type }}</p>
+                    <p class="dash-box-body">Skill: {{ woodproject.skill_level }}</p>
+                    <p>
+                        <a href="/woodproject/{{woodproject.id}}" class="text-primary">View</a>
+                        {% if woodproject.user_id == session.user_id %}
+                            | <a href="/edit/{{ woodproject.id }}" class="text-primary">Edit</a>
+                        {% endif %}
+                    </p>
+                </div>
+            {%endfor%}
+            </div>
+            <a href="/new" class="btn btn-primary btn-footer">Add a Project</a>
+        </div>
+    </div>
+</body>
+</html>
