@@ -9,30 +9,39 @@
     <title>Add a Project</title>
 </head>
 <body>
-    <div class="header">
-        <div class="nav-container">
-            <div class="side-left-nav">
-                <h1>{{user.username}}'s Next Creation!</h1>
-            </div>
-            <div class="side-right-nav">
-                <p>
-                    <a href="/dashboard" class="btn btn-light navbtn">All Projects</a> |
-                    <a href="/logout" class="btn btn-light navbtn">Logout</a>
-                </p>
+    <div class="header-infinite">
+        <div class="container-header-NEW">
+            <div class="nav-NEW">
+                <div class="nav-left-NEW">
+                    <a href="/dashboard" class="nav-btn-NEW">View All Projects</a> |
+                    <a href="/dashboard/myprojects" class="nav-btn-NEW">View My Projects</a>
+                </div>
+                <div class="nav-right-NEW">
+                    <a href="/logout" class="nav-btn-NEW">Logout</a>
+                </div>
             </div>
         </div>
     </div>
 
     <div class="container">
-        <h3 class="subhead">Add a New Project:</h3>
         <div class="body-container">
-            <form action="/create/woodproject" method="POST" class="card-wrapper">
+            <form class="card-wrapper" action="/create/woodproject" method="POST" enctype="multipart/form-data">
+                <h3 class="card-headline">{{user.username}}'s Next Creation:</h3>
                 <div class="form-row">
                     <div class='col-auto'>
                         <label for='project_name' class='col-form-label'>Project Name:</label>
                     </div>
                     <div class='col-auto'>
                         <input type='text' class='form-control' name='project_name' placeholder='Project Name'>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class='col-auto'>
+                        <label for='image_path' class='col-form-label'>Project Image:</label>
+                    </div>
+                    <div class='col-auto'>
+                        <input type=file name='woodProjectImg' class='form-control form-placeholder'>
                     </div>
                 </div>
 
@@ -91,7 +100,7 @@
                 </div>
 
                 <div class='text-center'>
-                    <input type='submit' value='Create' class='btn btn-footer btn-primary'>
+                    <input type='submit' value='Create' class='btn btn-success btn-footer'>
                 </div>
             </form>
         </div>

@@ -9,39 +9,59 @@
     <title>The Woodworking Joint</title>
 </head>
 <body>
-    <div class="header">
-        <div class="nav-container">
-            <div class="side-left-nav">
-                <h1>Welcome, {{user.username}}!</h1>
-            </div>
-            <div class="side-right-nav">
-                <p>
-                    <a href="/new" class="btn btn-light navbtn">Add a Project</a> |
-                    <a href="/logout" class="btn btn-light navbtn">Logout</a>
-                </p>
+    <div class="header-infinite">
+        <div class="container-header-NEW">
+            <div class="nav-NEW">
+                <div class="nav-left-NEW">
+                    <a href="/dashboard" class="nav-btn-NEW">View All Projects</a> |
+                    <a href="/dashboard/myprojects" class="nav-btn-NEW">View My Projects</a>
+                </div>
+                <div class="nav-right-NEW">
+                    <a href="/logout" class="nav-btn-NEW">Logout</a>
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="container">
-        <h3>Browse the Woodworking Joint</h3>
-        <div class="col-auto">
-            <div class="dash-box-container">
-            {%for woodproject in woodprojects%}
-                <div class="dash-box-box">
-                    <p class="dash-box-title">{{ woodproject.project_name }}</p>
-                    <p class="dash-box-body">Type: {{ woodproject.type }}</p>
-                    <p class="dash-box-body">Skill: {{ woodproject.skill_level }}</p>
-                    <p>
-                        <a href="/woodproject/{{woodproject.id}}" class="text-primary">View</a>
-                        {% if woodproject.user_id == session.user_id %}
-                            | <a href="/edit/{{ woodproject.id }}" class="text-primary">Edit</a>
-                        {% endif %}
-                    </p>
-                </div>
-            {%endfor%}
+    <div class="container-NEW">
+        <div class="container-hero">
+            <img class="header-img-NEW" src="/static/img/woodworking-header.jpg" alt="Vintage woodworking tools">
+            <h3 class="header-subhead">Welcome, {{user.username}}!</h3>
+            <h1 class="header-headline">Browse the Woodworking Joint</h1>
+            <div class="btn-hero-container">
+                <a href="/new" class="btn btn-success btn-hero">Add a Project</a>
             </div>
-            <a href="/new" class="btn btn-primary btn-footer">Add a Project</a>
+        </div>
+
+        <div class="container-body-NEW">
+            <div class="col-auto">
+                <div class="dash-box-container">
+                    {%for woodproject in woodprojects%}
+                        <div class="dash-box-box">
+                            <p class="dash-box-title">{{ woodproject.project_name }}</p>
+                            <a href="/woodproject/{{ woodproject.id }}">
+                                <img class = "dash-box-img" src="/static/user_img/{{ woodproject.image_path }}">
+                            </a>
+                            <div class="dash-box-content">
+                                <p class="dash-box-body">Type: {{ woodproject.type }}</p>
+                                <p class="dash-box-body">Skill: {{ woodproject.skill_level }}</p>
+                                <p>
+                                    <a href="/woodproject/{{ woodproject.id }}" class="dash-box-body dash-txt-cta">View</a>
+                                    {% if woodproject.user_id == session.user_id %}
+                                        | <a href="/edit/{{ woodproject.id }}" class="dash-box-body dash-txt-cta">Edit</a>
+                                    {% endif %}
+                                </p>
+                            </div>
+                        </div>
+                    {%endfor%}
+                </div>
+            </div>
+
+            <div class="footer-container">
+                <div>
+                    <a href="/new" class="btn btn-success btn-footer">Add a New Project</a>
+                </div>
+            </div>
         </div>
     </div>
 </body>

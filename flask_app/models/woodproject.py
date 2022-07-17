@@ -1,6 +1,14 @@
+from multiprocessing import allow_connection_pickling
+from operator import truediv
+from flask_app import app
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask import flash
 from flask_app.models import user
+#Image upload and validation: 
+import os
+from werkzeug.utils import secure_filename
+
+
 
 class Woodproject:
     db = "woodworking_joint"
@@ -10,6 +18,7 @@ class Woodproject:
         self.skill_level = data['skill_level']
         self.type = data['type']
         self.description = data['description']
+        self.image_path = data['image_path']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
         self.user_id = data['user_id']
@@ -17,12 +26,12 @@ class Woodproject:
 
 
 ###################################### 
-# CREATE METHODS 
+# SAVE METHODS 
 ###################################### 
 
     @classmethod
     def save(cls, data):
-        query = "INSERT INTO woodprojects (project_name, skill_level, type, description, user_id) VALUES (%(project_name)s, %(skill_level)s, %(type)s, %(description)s, %(user_id)s);"
+        query = "INSERT INTO woodprojects (project_name, skill_level, type, description, image_path, user_id) VALUES (%(project_name)s, %(skill_level)s, %(type)s, %(description)s, %(image_path)s, %(user_id)s);"
         return connectToMySQL(cls.db).query_db(query,data)
 
 
@@ -36,10 +45,17 @@ class Woodproject:
         results = connectToMySQL(cls.db).query_db(query)
         all_woodprojects = []
         for row in results:
-            print(row['type']) #TODO: Double check this. From "SHows" it was "release_date". Temp change to "type"
             all_woodprojects.append(cls(row))
         return all_woodprojects
 
+    @classmethod
+    def get_all_woodprojects_by_one_user(cls,data):
+        query = "SELECT * FROM woodprojects WHERE user_id = %(user_id)s;"
+        results = connectToMySQL(cls.db).query_db(query,data)
+        all_woodprojects = []
+        for row in results:
+            all_woodprojects.append(cls(row))
+        return all_woodprojects
 
     @classmethod
     def get_one_woodproject_by_id(cls,data):
@@ -48,15 +64,24 @@ class Woodproject:
         return cls(results[0])
 
 
+
+
 ###################################### 
 # UPDATE METHODS 
 ###################################### 
     @classmethod
     def update(cls,data):
         query = "UPDATE woodprojects SET project_name=%(project_name)s,skill_level=%(skill_level)s,type=%(type)s,description=%(description)s,updated_at=NOW() WHERE id=%(id)s;"
+        print(query)
         # "WHERE id = %(id)s" is coming from the hidden input on edit HTML file
         return connectToMySQL(cls.db).query_db(query,data)
 
+    @classmethod
+    def update_with_image(cls,data):
+        query = "UPDATE woodprojects SET project_name=%(project_name)s,skill_level=%(skill_level)s,type=%(type)s,description=%(description)s,image_path=%(image_path)s,updated_at=NOW() WHERE id=%(id)s;"
+        print(query)
+        # "WHERE id = %(id)s" is coming from the hidden input on edit HTML file
+        return connectToMySQL(cls.db).query_db(query,data)
 
 
 ###################################### 

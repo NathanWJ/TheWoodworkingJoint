@@ -9,31 +9,44 @@
     <title>Edit Project</title>
 </head>
 <body>
-    <div class="header">
-        <div class="nav-container">
-            <div class="side-left-nav">
-                <h1>{{user.username}}'s Project</h1> 
-            </div>
-            <div class="side-right-nav">
-                <p>
-                    <a href="/dashboard" class="btn btn-light navbtn">All Projects</a> |
-                    <a href="/logout" class="btn btn-light navbtn">Logout</a>
-                </p>
+    <div class="header-infinite">
+        <div class="container-header-NEW">
+            <div class="nav-NEW">
+                <div class="nav-left-NEW">
+                    <a href="/dashboard" class="nav-btn-NEW">View All Projects</a> |
+                    <a href="/dashboard/myprojects" class="nav-btn-NEW">View My Projects</a>
+                </div>
+                <div class="nav-right-NEW">
+                    <a href="/logout" class="nav-btn-NEW">Logout</a>
+                </div>
             </div>
         </div>
     </div>
 
     <div class="container">
-        <h3 class="subhead">Edit: {{edit.project_name}}</h3>
         <div class="body-container">
-            <form action="/update/woodproject" method="POST" class="card-wrapper">
-                <input type="hidden" name="id" value={{edit.id}}>
+            <form class="card-wrapper" action="/update/woodproject" method="POST">
+                <h3 class="card-headline">{{user.username}}, Edit Your Project:</h3>
+                <input type="hidden" name="id" value={{woodproject.id}}>
+                <input type="hidden" name="image_path" value={{woodproject.image_path}}>
                 <div class="form-row">
                     <div class='col-auto'>
                         <label for='project_name' class='col-sm-4 col-form-label'>Project Name:</label>
                         <div class='col-auto'>
-                            <input type='text' class='form-control' name='project_name' value='{{edit.project_name}}'>
+                            <input type='text' name='project_name' value='{{woodproject.project_name}}' class='form-control'>
                         </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class='col-auto'>
+                        <label for='image_path' class='col-form-label'>Project Image:</label>
+                    </div>
+                    <div class='col-auto'>
+                        <img class = "image-thumb" src="/static/user_img/{{ woodproject.image_path }}">
+                    </div>
+                    <div class='col-auto'>
+                        <a href="/edit/{{ woodproject.id }}/image" class='txt-cta' >Update Image</a>
                     </div>
                 </div>
 
@@ -42,7 +55,7 @@
                         <label for='skill_level' class='col-form-label'>Skill Level:</label>
                     </div>
                     <div class='col-auto'>
-                            {% if edit.skill_level == 'Beginner' %}
+                            {% if woodproject.skill_level == 'Beginner' %}
                                 <input type='radio' name='skill_level' id='beginner' value='Beginner' checked>
                                 <label for='beginner'>Beginner</label>
                                 
@@ -52,7 +65,7 @@
                                 <input type='radio' name='skill_level' id='advanced' value='Advanced'>
                                 <label for='advanced'>Advanced</label>
 
-                                {% elif edit.skill_level == 'Intermediate' %}
+                                {% elif woodproject.skill_level == 'Intermediate' %}
                                     <input type='radio' name='skill_level' id='beginner' value='Beginner'>
                                     <label for='beginner'>Beginner</label>
                                     
@@ -81,7 +94,7 @@
                     </div>
                     <div>
                         <select id='type' name='type' class='form-control'>
-                            <option value='{{edit.project_name}}'>{{edit.type}}</option>
+                            <option value='{{woodproject.project_name}}'>{{woodproject.type}}</option>
                             <option value='Traditional Power Tools'>Traditional Power Tools</option>
                             <option value='Turning'>Turning</option>
                             <option value='Hand Tools Only'>Hand Tools Only</option>
@@ -99,7 +112,7 @@
                         <label for='description' class='col-sm-4 col-form-label'>Description:</label>
                     </div>
                     <div class='col-auto'>
-                        <textarea class='form-control'name='description' rows='5' cols='30'>{{edit.description}}</textarea>
+                        <textarea class='form-control'name='description' rows='5' cols='30'>{{woodproject.description}}</textarea>
                     </div>
                 </div>
 
@@ -114,10 +127,10 @@
                 </div>
 
                 <div class='col text-center'>
-                    <input type='submit' value='Update Project' class='btn btn-footer btn-primary'>
+                    <input type='submit' value='Update Project' class='btn btn-success btn-footer'>
                     <div>
-                        <a href="/dashboard" class='txt-link' >Back to All Projects</a>
-                        | <a href="/destroy/woodproject/{{ edit.id }}" class="text-danger">Delete</a>
+                        <a href="/dashboard" class='txt-cta' >Back to All Projects</a>
+                        | <a href="/destroy/woodproject/{{ woodproject.id }}" class="text-danger">Delete</a>
                     </div>
                 </div>
             </form>
